@@ -13,24 +13,24 @@ document.addEventListener('click', (e) => {
   const borderLeft = parseInt(wallStyle.borderLeftWidth);
   const borderTop = parseInt(wallStyle.borderTopWidth);
 
-  const clickCoordinatX = e.clientX - wallRect.left - borderLeft;
-  const clickCoordinatY = e.clientY - wallRect.top - borderTop;
+  const clickCenterX = e.clientX - wallRect.left - borderLeft;
+  const clickCenterY = e.clientY - wallRect.top - borderTop;
 
   const spiderWidth = spider.offsetWidth;
   const spiderHeight = spider.offsetHeight;
 
-  const leftPosit = clickCoordinatX - spiderWidth / 2;
-  const topPosit = clickCoordinatY - spiderHeight / 2;
+  const wallWidth = wall.clientWidth;
+  const wallHeight = wall.clientHeight;
 
-  const clampedLeft = Math.max(
-    0,
-    Math.min(leftPosit, wall.clientWidth - spiderWidth),
+  const centerX = Math.max(
+    spiderWidth / 2,
+    Math.min(clickCenterX, wallWidth - spiderWidth / 2),
   );
-  const clampedTop = Math.max(
-    0,
-    Math.min(topPosit, wall.clientHeight - spiderHeight),
+  const centerY = Math.max(
+    spiderHeight / 2,
+    Math.min(clickCenterY, wallHeight - spiderHeight / 2),
   );
 
-  spider.style.left = clampedLeft + 'px';
-  spider.style.top = clampedTop + 'px';
+  spider.style.left = centerX - spiderWidth / 2 + 'px';
+  spider.style.top = centerY - spiderHeight / 2 + 'px';
 });
